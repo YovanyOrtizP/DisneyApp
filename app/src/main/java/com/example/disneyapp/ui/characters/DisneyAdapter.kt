@@ -3,28 +3,31 @@ package com.example.disneyapp.ui.characters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.disneyapp.data.model.DisneyData
 import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.databinding.ItemDisneyBinding
 import com.squareup.picasso.Picasso
 
 class DisneyAdapter(
-    val disneyList: MutableList<DisneyResponse> = mutableListOf(),
-    val clickListener: (DisneyResponse) -> Unit
+    private val disneyList: MutableList<DisneyData> = mutableListOf(),
+    // high order function to handle the click on the item in recycler view
+    private val clickListener: (DisneyData) -> Unit
 ) : RecyclerView.Adapter<DisneyAdapter.ViewHolder>() {
 
-    fun updateDisneyAdapter(newDisney: DisneyResponse) {
+    fun updateDisneyAdapter(newDisney: List<DisneyData>) {
         disneyList.clear()
-        disneyList.addAll(listOf(newDisney))
+        disneyList.addAll(newDisney)
         notifyDataSetChanged()
     }
 
     inner class ViewHolder(private val view: ItemDisneyBinding) :
         RecyclerView.ViewHolder(view.root) {
-        fun setup(disneyResponse: DisneyResponse) {
-            for (i in 0..disneyList.size) {
-                Picasso.get().load(disneyResponse.data?.get(i)?.url).into(view.disneyCharacter)
-                view.characterName.text = disneyResponse.data?.get(i)?.name
-            }
+        fun setup(disneyResponse: DisneyData, clickListener: (DisneyData) -> Unit) {
+                Picasso.get().load(disneyResponse.imageUrl).resize(600,500).into(view.disneyCharacter)
+                view.characterName.text = disneyResponse.name
+
+            // setting a click to each card view in the recycler view
+            itemView.setOnClickListener { clickListener(disneyResponse) }
         }
     }
 
@@ -37,7 +40,7 @@ class DisneyAdapter(
     )
 
     override fun onBindViewHolder(holder: DisneyAdapter.ViewHolder, position: Int) {
-        holder.setup(disneyList[position])
+        holder.setup(disneyList[position], clickListener)
     }
 
     override fun getItemCount(): Int = disneyList.size

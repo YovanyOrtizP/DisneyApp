@@ -5,11 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class DisneyData(
     @SerializedName("allies")
-    val allies: List<Any?>? = listOf(),
+    val allies: List<String>? = listOf(),
     @SerializedName("enemies")
-    val enemies: List<Any?>? = listOf(),
+    val enemies: List<String>? = listOf(),
     @SerializedName("films")
-    val films: List<String?>? = listOf(),
+    val films: List<String>? = listOf(),
     @SerializedName("_id")
     val id: Int? = 0,
     @SerializedName("imageUrl")
@@ -17,13 +17,13 @@ data class DisneyData(
     @SerializedName("name")
     val name: String? = "",
     @SerializedName("parkAttractions")
-    val parkAttractions: List<String?>? = listOf(),
+    val parkAttractions: List<String>? = listOf(),
     @SerializedName("shortFilms")
-    val shortFilms: List<String?>? = listOf(),
+    val shortFilms: List<String>? = listOf(),
     @SerializedName("tvShows")
-    val tvShows: List<String?>? = listOf(),
+    val tvShows: List<String>? = listOf(),
     @SerializedName("url")
     val url: String? = "",
     @SerializedName("videoGames")
-    val videoGames: List<String?>? = listOf()
+    val videoGames: List<String>? = listOf()
 )

@@ -48,6 +48,7 @@ class NetworkModule {
             .client(okHttpClient)
             .build()
 
+    //Create the DisneyApi for the network connection
     @Provides
     fun provideAnimeApi(
         retrofit: Retrofit

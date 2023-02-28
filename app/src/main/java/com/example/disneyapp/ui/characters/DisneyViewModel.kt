@@ -4,10 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.disneyapp.data.model.DisneyData
 import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.data.repository.DisneyRepository
 import com.example.disneyapp.util.ResponseType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -16,19 +18,15 @@ class DisneyViewModel @Inject constructor(
     private val disneyRepository: DisneyRepository
 ) :ViewModel(){
 
-    var disneyObject: DisneyResponse? = null
+    var disneyObject: DisneyData? = null
 
-    private val _result = MutableLiveData<ResponseType>()
-    val result: LiveData<ResponseType> = _result
+    private val _result = MutableLiveData<ResponseType<List<DisneyData>>>()
+    val result: LiveData<ResponseType<List<DisneyData>>> = _result
 
-    fun getCharacter(){
+    fun flowCharacters() {
         viewModelScope.launch {
-            _result.postValue(ResponseType.LOADING)
-            val response = disneyRepository.getCharacters()
-            if (response.isSuccessful){
-                _result.postValue(ResponseType.SUCCESS(response.body()!!))
-            }else{
-                _result.postValue(ResponseType.ERROR(response.message()))
+            disneyRepository.getCharactersFlow().collect {
+                _result.postValue(it)
             }
         }
     }
