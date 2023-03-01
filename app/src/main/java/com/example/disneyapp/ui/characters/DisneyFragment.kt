@@ -5,13 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.disneyapp.R
 import com.example.disneyapp.data.model.DisneyData
-import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.databinding.FragmentDisneyBinding
 import com.example.disneyapp.util.ResponseType
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,6 +21,7 @@ class DisneyFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DisneyViewModel by activityViewModels()
+    var counter = 1
 
     private val mAdapter by lazy {
         DisneyAdapter {
@@ -37,6 +37,14 @@ class DisneyFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDisneyBinding.inflate(inflater, container, false)
+
+//        binding.nsView.setOnScrollChangeListener(NestedScrollView.OnScrollChangeListener{
+//            v, scrollX, scrollY, oldScrollX, oldScrollY ->
+//            if (scrollY == v.getChildAt(0).measuredHeight - v.measuredHeight){
+//                binding.pbLoading.visibility = View.VISIBLE
+//                viewModel.flowCharacters(counter)
+//            }
+//        })
 
         binding.rvDisney.apply {
             layoutManager = GridLayoutManager(context, 3)

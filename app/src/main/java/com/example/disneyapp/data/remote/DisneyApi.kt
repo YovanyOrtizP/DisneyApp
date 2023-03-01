@@ -7,16 +7,16 @@ import retrofit2.http.Query
 
 interface DisneyApi {
     //https://api.disneyapi.dev/characters
-
+    //https://api.disneyapi.dev/characters?page=2
     @GET(CHARACTERS)
     suspend fun getCharacters(
-        //@Query("nombre") name: String
+        @Query(PARAM_PAGE) nextPage: Int? = null
     ): Response<DisneyResponse>
 
-
-    companion object{
+    companion object {
         const val BASE_URL = "https://api.disneyapi.dev"
         const val CHARACTERS = "/characters"
+        const val PARAM_PAGE = "page"
     }
 
 }

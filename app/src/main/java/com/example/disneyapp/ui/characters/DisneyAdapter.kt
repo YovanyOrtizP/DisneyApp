@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.disneyapp.data.model.DisneyData
-import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.databinding.ItemDisneyBinding
 import com.squareup.picasso.Picasso
 
@@ -22,7 +21,7 @@ class DisneyAdapter(
 
     inner class ViewHolder(private val view: ItemDisneyBinding) :
         RecyclerView.ViewHolder(view.root) {
-        fun setup(disneyResponse: DisneyData, clickListener: (DisneyData) -> Unit) {
+        fun setup(disneyResponse: DisneyData) {
                 Picasso.get().load(disneyResponse.imageUrl).resize(600,500).into(view.disneyCharacter)
                 view.characterName.text = disneyResponse.name
 
@@ -40,7 +39,7 @@ class DisneyAdapter(
     )
 
     override fun onBindViewHolder(holder: DisneyAdapter.ViewHolder, position: Int) {
-        holder.setup(disneyList[position], clickListener)
+        holder.setup(disneyList[position])
     }
 
     override fun getItemCount(): Int = disneyList.size

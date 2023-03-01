@@ -1,4 +1,5 @@
-<FrameLayout
+<androidx.core.widget.NestedScrollView
+    android:id="@+id/nsView"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,11 +7,22 @@
     android:layout_height="match_parent"
     tools:context="com.example.disneyapp.ui.characters.DisneyFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_disney"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:itemCount="15"/>
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_disney"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            tools:itemCount="15"/>
+
+        <ProgressBar
+            android:id="@+id/pbLoading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

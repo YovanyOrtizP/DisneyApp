@@ -1,8 +1,14 @@
 package com.example.disneyapp.data.repository
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.example.disneyapp.data.model.DisneyData
 import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.data.remote.DisneyApi
+
+import com.example.disneyapp.ui.characters.paging.DisneyPaging
 import com.example.disneyapp.util.ResponseType
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -30,5 +36,9 @@ class DisneyRepositoryImp @Inject constructor(
             emit(ResponseType.ERROR(e.localizedMessage))
         }
     }
+//    fun getPages() = Pager(
+//        config = PagingConfig(pageSize = 50, maxSize = 100),
+//        pagingSourceFactory = {DisneyPaging(disneyApi)}
+//    ).liveData
 }
 //We don't expose the implementation

@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.disneyapp.data.model.DisneyData
-import com.example.disneyapp.data.model.DisneyResponse
 import com.example.disneyapp.data.repository.DisneyRepository
 import com.example.disneyapp.util.ResponseType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -30,4 +28,5 @@ class DisneyViewModel @Inject constructor(
             }
         }
     }
+
 }
